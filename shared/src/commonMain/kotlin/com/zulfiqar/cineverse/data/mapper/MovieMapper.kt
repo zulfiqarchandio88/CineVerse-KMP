@@ -1,16 +1,17 @@
 package com.zulfiqar.cineverse.data.mapper
 
-import com.zulfiqar.cineverse.domain.model.Cast
-import com.zulfiqar.cineverse.domain.model.Genre
-import com.zulfiqar.cineverse.domain.model.Movie
-import com.zulfiqar.cineverse.domain.model.Review
-import com.zulfiqar.cineverse.domain.model.Trailer
 import com.zulfiqar.cineverse.data.remote.dto.CastDto
 import com.zulfiqar.cineverse.data.remote.dto.GenreDto
 import com.zulfiqar.cineverse.data.remote.dto.MovieDetailsDto
 import com.zulfiqar.cineverse.data.remote.dto.MovieDto
 import com.zulfiqar.cineverse.data.remote.dto.ReviewDto
 import com.zulfiqar.cineverse.data.remote.dto.VideoDto
+import com.zulfiqar.cineverse.domain.model.Cast
+import com.zulfiqar.cineverse.domain.model.Genre
+import com.zulfiqar.cineverse.domain.model.Movie
+import com.zulfiqar.cineverse.domain.model.MovieDetails
+import com.zulfiqar.cineverse.domain.model.Review
+import com.zulfiqar.cineverse.domain.model.Trailer
 
 private const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"
 
@@ -32,13 +33,30 @@ fun MovieDto.toDomain(): Movie {
     )
 }
 
-fun MovieDetailsDto.toDomain(): Movie {
+fun MovieDetailsDto.toDomain(): MovieDetails {
+    return MovieDetails(
+        id = id,
+        title = title,
+        overview = overview,
+        posterPath = posterPath?.let { IMAGE_BASE_URL + it } ?: "",
+        backdropPath = backdropPath?.let { IMAGE_BASE_URL + it } ?: "",
+        releaseDate = releaseDate,
+        voteAverage = voteAverage,
+        runtime = runtime ?: 0,
+        genres = genres.map { it.toDomain() },
+        status = status ?: "",
+        tagline = tagline ?: "",
+        homepage = homepage
+    )
+}
+
+fun MovieDetailsDto.toMovie(): Movie {
     return Movie(
         id = id,
         title = title,
         overview = overview,
-        posterPath = posterPath?.let { IMAGE_BASE_URL + it } as String,
-        backdropPath = backdropPath?.let { IMAGE_BASE_URL + it } as String,
+        posterPath = posterPath?.let { IMAGE_BASE_URL + it } ?: "",
+        backdropPath = backdropPath?.let { IMAGE_BASE_URL + it } ?: "",
         releaseDate = releaseDate,
         voteAverage = voteAverage,
         voteCount = voteCount,

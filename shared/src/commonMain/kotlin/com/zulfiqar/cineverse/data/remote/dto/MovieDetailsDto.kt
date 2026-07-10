@@ -38,5 +38,11 @@ data class MovieDetailsDto(
     @SerialName("original_language")
     val originalLanguage: String,
 
-    val genres: List<GenreDto>
+    val genres: List<GenreDto>,
+
+    val status: String? = null,
+
+    val tagline: String? = null,
+
+    val homepage: String? = null
 )

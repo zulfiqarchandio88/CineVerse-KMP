@@ -18,6 +18,9 @@ dependencies {
 
     implementation(libs.compose.uiToolingPreview)
     debugImplementation(libs.compose.uiTooling)
+    
+    // Ktor
+    implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.okhttp)
 }
 

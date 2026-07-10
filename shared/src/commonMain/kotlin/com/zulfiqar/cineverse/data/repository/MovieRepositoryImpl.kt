@@ -7,6 +7,7 @@ import com.zulfiqar.cineverse.data.remote.api.MovieApi
 import com.zulfiqar.cineverse.domain.model.Cast
 import com.zulfiqar.cineverse.domain.model.Genre
 import com.zulfiqar.cineverse.domain.model.Movie
+import com.zulfiqar.cineverse.domain.model.MovieDetails
 import com.zulfiqar.cineverse.domain.model.Review
 import com.zulfiqar.cineverse.domain.model.Trailer
 import com.zulfiqar.cineverse.domain.repository.MovieRepository
@@ -40,7 +41,7 @@ class MovieRepositoryImpl(
             api.searchMovies(query).results.map { it.toDomain() }
         }
 
-    override suspend fun getMovieDetails(movieId: Int): Result<Movie> =
+    override suspend fun getMovieDetails(movieId: Int): Result<MovieDetails> =
         safeApiCall {
             api.getMovieDetails(movieId).toDomain()
         }
