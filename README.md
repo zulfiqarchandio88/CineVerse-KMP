@@ -1,31 +1,230 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+# 🎬 CineVerse KMP
 
-* [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+A modern Netflix-inspired movie application built with **Kotlin Multiplatform (KMP)** and **Compose Multiplatform**, sharing business logic and UI across Android and iOS.
 
-* [/shared](./shared/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./shared/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./shared/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./shared/src/jvmMain/kotlin)
-    folder is the appropriate location.
-
-### Running the apps
-
-Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
-
-- Android app: `./gradlew :androidApp:assembleDebug`
-- iOS app: open the [/iosApp](./iosApp) directory in Xcode and run it from there.
-
-### Running tests
-
-Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
-
-- Android tests: `./gradlew :shared:testAndroidHostTest`
-- iOS tests: `./gradlew :shared:iosSimulatorArm64Test`
+> Powered by The Movie Database (TMDB) API.
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## 📱 Screenshots
+
+| Featured | Popular | New Releases | Movie Details |
+| :---: | :---: | :---: | :---: |
+| ![](screenshots/featured.png) | ![](screenshots/popular.png) | ![](screenshots/new_releases.png) | ![](screenshots/details.png) |
+
+> Add your screenshots inside a `screenshots` folder.
+
+```
+screenshots/
+├── featured.png
+├── popular.png
+├── new_releases.png
+└── details.png
+```
+
+---
+
+# ✨ Features
+
+- 🎬 Trending Movies
+- ⭐ Popular Movies
+- 🏆 Top Rated Movies
+- 🎥 Upcoming Movies
+- 🔍 Movie Search
+- 🎞 Netflix-style Hero Carousel
+- 📄 Movie Details
+- 👥 Movie Cast
+- ⭐ Movie Reviews
+- ▶ Movie Trailers
+- 🌙 Dark Theme
+- 🚀 Shared Business Logic
+- 📱 Android & iOS Support
+
+---
+
+# 🏗 Architecture
+
+The project follows **Clean Architecture + MVVM**.
+
+```
+Presentation
+      │
+      ▼
+ViewModel
+      │
+      ▼
+UseCases
+      │
+      ▼
+Repository
+      │
+      ▼
+Remote API (Ktor)
+```
+
+---
+
+# 📂 Project Structure
+
+```
+androidApp/
+iosApp/
+shared/
+│
+├── core
+│   ├── common
+│   ├── extensions
+│   ├── network
+│   └── platform
+│
+├── data
+│   ├── mapper
+│   ├── remote
+│   │   ├── api
+│   │   ├── dto
+│   │   └── repository
+│
+├── domain
+│   ├── model
+│   ├── repository
+│   └── usecase
+│
+├── di
+│
+└── presentation
+    ├── components
+    ├── details
+    ├── home
+    ├── navigation
+    └── theme
+```
+
+---
+
+# 🛠 Tech Stack
+
+- Kotlin Multiplatform
+- Compose Multiplatform
+- Kotlin Coroutines
+- StateFlow
+- Ktor Client
+- Kotlinx Serialization
+- Koin
+- Compose Navigation
+- Coil 3
+- Material 3
+- MVVM
+- Clean Architecture
+
+---
+
+# 📡 API
+
+Movie data is provided by:
+
+**The Movie Database (TMDB)**
+
+https://developer.themoviedb.org/
+
+---
+
+# 🚀 Getting Started
+
+## Clone
+
+```bash
+git clone https://github.com/zulfiqarchandio88/CineVerse-KMP.git
+```
+
+---
+
+## Android
+
+Open with Android Studio.
+
+Run:
+
+```
+androidApp
+```
+
+---
+
+## iOS
+
+Open:
+
+```
+iosApp.xcodeproj
+```
+
+Run on an iPhone simulator using Xcode.
+
+---
+
+# 🔑 API Key
+
+Create a `NetworkConstants.kt` file and add your TMDB API key.
+
+```kotlin
+object NetworkConstants {
+
+    const val API_KEY = "YOUR_API_KEY"
+
+    const val BASE_URL = "https://api.themoviedb.org/3/"
+}
+```
+
+---
+
+# Implemented Screens
+
+- Home
+- Featured Carousel
+- Movie Details
+
+---
+
+# Upcoming Features
+
+- ✅ Favorites
+- ✅ Offline Cache
+- ✅ Search Screen
+- ✅ Genres
+- ✅ Similar Movies
+- ✅ Watchlist
+- ✅ Trailer Player
+- ✅ Pagination
+- ✅ Settings
+
+---
+
+# Demo
+
+<img src="screenshots/home.gif" width="280"/>
+
+---
+
+# Author
+
+**Zulfiqar Chandio**
+
+Senior Android & Kotlin Multiplatform Developer
+
+LinkedIn
+
+https://www.linkedin.com/in/zulfiqarchandio/
+
+GitHub
+
+https://github.com/zulfiqarchandio88
+
+---
+
+# License
+
+MIT License
+
+---
+
+## ⭐ If you like this project, don't forget to star the repository!
