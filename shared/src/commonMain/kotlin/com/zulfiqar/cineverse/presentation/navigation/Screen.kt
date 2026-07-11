@@ -1,17 +1,19 @@
 package com.zulfiqar.cineverse.presentation.navigation
 
-sealed class Screen(val route: String) {
+import kotlinx.serialization.Serializable
 
-    data object Home : Screen("home")
+@Serializable
+sealed interface Screen {
 
-    data object Search : Screen("search")
+    @Serializable
+    data object Home : Screen
 
-    data object Favorites : Screen("favorites")
+    @Serializable
+    data object Search : Screen
 
-    data object MovieDetails : Screen("movie_details/{movieId}") {
+    @Serializable
+    data object Favorites : Screen
 
-        fun createRoute(movieId: Int): String {
-            return "movie_details/$movieId"
-        }
-    }
+    @Serializable
+    data class MovieDetails(val movieId: Int) : Screen
 }

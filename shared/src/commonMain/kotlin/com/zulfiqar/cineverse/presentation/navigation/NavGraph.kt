@@ -1,11 +1,10 @@
 package com.zulfiqar.cineverse.presentation.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import com.zulfiqar.cineverse.presentation.details.MovieDetailsScreen
 import com.zulfiqar.cineverse.presentation.home.HomeScreen
 
@@ -16,34 +15,25 @@ fun NavGraph() {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route
+        startDestination = Screen.Home
     ) {
 
-        composable(Screen.Home.route) {
+        composable<Screen.Home> {
 
             HomeScreen(
                 onMovieClick = { movieId ->
                     navController.navigate(
-                        Screen.MovieDetails.createRoute(movieId)
+                        Screen.MovieDetails(movieId)
                     )
                 }
             )
         }
 
-        composable(
-            route = Screen.MovieDetails.route,
-            arguments = listOf(
-                navArgument("movieId") {
-                    type = NavType.IntType
-                }
-            )
-        ) {
-
-            val movieId =
-                it.arguments?.getString("movieId")?.toInt() ?: 0
+        composable<Screen.MovieDetails> { backStackEntry ->
+            val movieDetailsRoute: Screen.MovieDetails = backStackEntry.toRoute()
 
             MovieDetailsScreen(
-                movieId = movieId,
+                movieId = movieDetailsRoute.movieId,
                 onBack = {
                     navController.popBackStack()
                 }
