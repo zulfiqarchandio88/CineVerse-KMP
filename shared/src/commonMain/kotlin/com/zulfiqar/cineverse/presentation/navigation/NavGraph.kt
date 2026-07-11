@@ -40,7 +40,7 @@ fun NavGraph() {
         ) {
 
             val movieId =
-                it.arguments?.getInt("movieId") ?: 0
+                it.arguments?.getString("movieId")?.toInt() ?: 0
 
             MovieDetailsScreen(
                 movieId = movieId,

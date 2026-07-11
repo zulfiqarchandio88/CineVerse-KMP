@@ -15,7 +15,7 @@ import com.zulfiqar.cineverse.domain.model.Trailer
 
 private const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"
 
-fun MovieDto.toDomain(): Movie {
+fun MovieDto.toMovie(): Movie {
     return Movie(
         id = id,
         title = title,
@@ -33,7 +33,7 @@ fun MovieDto.toDomain(): Movie {
     )
 }
 
-fun MovieDetailsDto.toDomain(): MovieDetails {
+fun MovieDetailsDto.toMovieDetails(): MovieDetails {
     return MovieDetails(
         id = id,
         title = title,
@@ -43,7 +43,7 @@ fun MovieDetailsDto.toDomain(): MovieDetails {
         releaseDate = releaseDate,
         voteAverage = voteAverage,
         runtime = runtime ?: 0,
-        genres = genres.map { it.toDomain() },
+        genres = genres.map { it.toGenre() },
         status = status ?: "",
         tagline = tagline ?: "",
         homepage = homepage
@@ -68,14 +68,14 @@ fun MovieDetailsDto.toMovie(): Movie {
     )
 }
 
-fun GenreDto.toDomain(): Genre {
+fun GenreDto.toGenre(): Genre {
     return Genre(
         id = id,
         name = name
     )
 }
 
-fun CastDto.toDomain(): Cast {
+fun CastDto.toCast(): Cast {
     return Cast(
         id = id,
         name = name,
@@ -84,7 +84,7 @@ fun CastDto.toDomain(): Cast {
     )
 }
 
-fun ReviewDto.toDomain(): Review {
+fun ReviewDto.toReview(): Review {
     return Review(
         id = id,
         author = author,
@@ -96,7 +96,7 @@ fun ReviewDto.toDomain(): Review {
     )
 }
 
-fun VideoDto.toDomain(): Trailer {
+fun VideoDto.toTrailer(): Trailer {
     return Trailer(
         id = id,
         key = key,

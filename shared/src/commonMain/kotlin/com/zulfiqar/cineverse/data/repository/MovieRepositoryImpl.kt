@@ -2,7 +2,11 @@ package com.zulfiqar.cineverse.data.repository
 
 import com.zulfiqar.cineverse.core.common.Result
 import com.zulfiqar.cineverse.core.common.safeApiCall
-import com.zulfiqar.cineverse.data.mapper.toDomain
+import com.zulfiqar.cineverse.data.mapper.toCast
+import com.zulfiqar.cineverse.data.mapper.toMovie
+import com.zulfiqar.cineverse.data.mapper.toMovieDetails
+import com.zulfiqar.cineverse.data.mapper.toReview
+import com.zulfiqar.cineverse.data.mapper.toTrailer
 import com.zulfiqar.cineverse.data.remote.api.MovieApi
 import com.zulfiqar.cineverse.domain.model.Cast
 import com.zulfiqar.cineverse.domain.model.Genre
@@ -18,32 +22,32 @@ class MovieRepositoryImpl(
 
     override suspend fun getTrendingMovies(): Result<List<Movie>> =
         safeApiCall {
-            api.getTrendingMovies().results.map { it.toDomain() }
+            api.getTrendingMovies().results.map { it.toMovie() }
         }
 
     override suspend fun getPopularMovies(): Result<List<Movie>> =
         safeApiCall {
-            api.getPopularMovies().results.map { it.toDomain() }
+            api.getPopularMovies().results.map { it.toMovie() }
         }
 
     override suspend fun getTopRatedMovies(): Result<List<Movie>> =
         safeApiCall {
-            api.getTopRatedMovies().results.map { it.toDomain() }
+            api.getTopRatedMovies().results.map { it.toMovie() }
         }
 
     override suspend fun getUpcomingMovies(): Result<List<Movie>> =
         safeApiCall {
-            api.getUpcomingMovies().results.map { it.toDomain() }
+            api.getUpcomingMovies().results.map { it.toMovie() }
         }
 
     override suspend fun searchMovies(query: String): Result<List<Movie>> =
         safeApiCall {
-            api.searchMovies(query).results.map { it.toDomain() }
+            api.searchMovies(query).results.map { it.toMovie() }
         }
 
     override suspend fun getMovieDetails(movieId: Int): Result<MovieDetails> =
         safeApiCall {
-            api.getMovieDetails(movieId).toDomain()
+            api.getMovieDetails(movieId).toMovieDetails()
         }
 
     override suspend fun getMovieGenres(): Result<List<Genre>> {
@@ -52,17 +56,17 @@ class MovieRepositoryImpl(
 
     override suspend fun getMovieCast(movieId: Int): Result<List<Cast>> =
         safeApiCall {
-            api.getMovieCast(movieId).cast.map { it.toDomain() }
+            api.getMovieCast(movieId).cast.map { it.toCast() }
         }
 
     override suspend fun getMovieReviews(movieId: Int): Result<List<Review>> =
         safeApiCall {
-            api.getMovieReviews(movieId).results.map { it.toDomain() }
+            api.getMovieReviews(movieId).results.map { it.toReview() }
         }
 
     override suspend fun getMovieTrailers(movieId: Int): Result<List<Trailer>> =
         safeApiCall {
-            api.getMovieTrailers(movieId).results.map { it.toDomain() }
+            api.getMovieTrailers(movieId).results.map { it.toTrailer() }
         }
 
     // Temporary implementations
